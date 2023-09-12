@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibraLogia - Perpustakaan Ilmu Pengetahuan</title>
+</head>
+<body>
+    <header>
+        <h1>LibraLogia - Perpustakaan Ilmu Pengetahuan</h1>
+    </header>
+    <main>
+        <section class="add-collection">
+            <h2>Tambah Koleksi Buku</h2>
+            <button id="addCollectionButton">Tambah Koleksi Buku</button>
+        </section>
+        <section class="stock-control">
+            <h2>Stok Buku</h2>
+            <p>Total Stok Buku: <span id="totalStock">0</span></p>
+        </section>
+        <section class="book-list">
+            <h2>Koleksi Buku</h2>
+            <ul class="product-list">
+                {% for product in products %}
+                <li class="product-item">
+                    <h3>{{ product.name }}</h3>
+                    <img src="{{ product.image_url }}" alt="{{ product.name }}" style="border: 1px solid #ccc; max-width: 200px;">
+                    <p>Penulis: {{ product.author }}</p>
+                    <p>Tahun Terbit: {{ product.year }}</p>
+                    <p>Penerbit: {{ product.publisher }}</p>
+                    <p>Genre: {{ product.genre }}</p>
+                    <p>Deskripsi: {{ product.description }}</p>
+                    <p>Rating: {{ product.rating }}/5</p>
+                    <p>Stok: {{ product.amount }}</p>
+                    <button class="decrease-stock">-</button>
+                    <button class="increase-stock">+</button>
+                </li>
+                {% endfor %}
+            </ul>
+            
+        </section>
+        <section class="about-us">
+            <h2>About Us</h2>
+            <p>LibraLogia, berasal dari kata "libra" dalam bahasa Inggris yang merujuk pada perpustakaan dan "logia" dalam bahasa Yunani yang berarti ilmu pengetahuan, adalah platform yang memadukan kata "libra" yang merujuk pada perpustakaan dan "logia" dalam bahasa Yunani yang berarti ilmu pengetahuan. Kami hadir untuk menyediakan solusi pengelolaan buku yang efisien dan praktis. Dengan LibraLogia, Anda dapat mengelola koleksi buku dengan mudah dan mengawasi stok dengan cepat. Kami bertujuan untuk memudahkan akses pengetahuan bagi perpustakaan dan individu. Selamat datang di LibraLogia, tempat di mana ilmu pengetahuan dan perpustakaan bertemu dalam satu platform.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 LibraLogia - Perpustakaan Ilmu Pengetahuan</p>
+    </footer>
+</body>
+</html>
