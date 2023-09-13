@@ -42,36 +42,36 @@ link: https://libralogia.adaptable.app/
         Langkah terakhir adalah menonaktifkan lingkungan virtual yang mungkin telah saya gunakan selama proses pengembangan aplikasi. Ini penting untuk memastikan efisiensi sumber daya dan menghindari konsumsi daya yang tidak perlu setelah proyek selesai dan aplikasi telah di-deploy secara online.
 
 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
-![Gambar no 2 Gyan](https://ibb.co/wpKNYd7)
-Ketika seorang klien mengirimkan permintaan ke URL http://localhost:8000/ dalam aplikasi Django, sistem akan mencocokkan URL tersebut dengan pola yang telah didefinisikan sebelumnya dalam file urls.py. Setelah cocok, server akan menjalankan fungsi tampilan (views) terkait, di mana logika bisnis dan persiapan data dilakukan, seringkali melibatkan akses ke model yang menggambarkan data dalam database. Setelah data diambil dan diproses, fungsi tampilan akan merender template (contohnya, "index.html") untuk menghasilkan tampilan akhir. Respons dari proses ini kemudian dikirimkan sebagai halaman web yang ditampilkan kepada klien, memungkinkan mereka melihat konten yang dihasilkan dinamis sesuai permintaan mereka.
+    ![PBP tugas 2 nomor 2 Gyan](https://github.com/Gyan-Bano/tugas-pbp-gyan/assets/124954416/187eb104-b6e6-49f4-bab6-273c8b89bc9b)
+    Ketika seorang klien mengirimkan permintaan ke URL http://localhost:8000/ dalam aplikasi Django, sistem akan mencocokkan URL tersebut dengan pola yang telah didefinisikan sebelumnya dalam file urls.py. Setelah cocok, server akan menjalankan fungsi tampilan (views) terkait, di mana logika bisnis dan persiapan data dilakukan, seringkali melibatkan akses ke model yang menggambarkan data dalam database. Setelah data diambil dan diproses, fungsi tampilan akan merender template (contohnya, "index.html") untuk menghasilkan tampilan akhir. Respons dari proses ini kemudian dikirimkan sebagai halaman web yang ditampilkan kepada klien, memungkinkan mereka melihat konten yang dihasilkan dinamis sesuai permintaan mereka.
 
 3. Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
-Sebagai seseorang yang baru belajar django, saya menggunakan virtual environment karena beberapa alasan:
-- Isolasi Dependensi: Setiap proyek yang saya kerjakan mungkin memerlukan versi pustaka yang berbeda. Dengan    menggunakan virtual environment, saya dapat mengisolasi dependensi proyek sehingga tidak saling bertabrakan.
-- Menghindari Konflik Sistem: Beberapa pustaka mungkin memerlukan versi yang berbeda dari pustaka sistem. Dengan menggunakan virtual environment, saya dapat menghindari konflik ini.
-- Reproduktivitas: Dengan menggunakan virtual environment, saya dapat dengan mudah mereproduksi lingkungan      pengembangan di mesin lain.
+    Sebagai seseorang yang baru belajar django, saya menggunakan virtual environment karena beberapa alasan:
+    - Isolasi Dependensi: Setiap proyek yang saya kerjakan mungkin memerlukan versi pustaka yang berbeda. Dengan    menggunakan virtual environment, saya dapat mengisolasi dependensi proyek sehingga tidak saling bertabrakan.
+    - Menghindari Konflik Sistem: Beberapa pustaka mungkin memerlukan versi yang berbeda dari pustaka sistem. Dengan menggunakan virtual environment, saya dapat menghindari konflik ini.
+    - Reproduktivitas: Dengan menggunakan virtual environment, saya dapat dengan mudah mereproduksi lingkungan      pengembangan di mesin lain.
 
-Lalu sebenarnya saya tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment. Namun, hal ini tidak disarankan karena dapat menyebabkan konflik dependensi antara proyek dan sistem. Selain itu, tanpa virtual environment, akan sulit untuk memastikan bahwa aplikasi yang saya buat akan berjalan dengan benar di lingkungan lain karena versi pustaka yang digunakan mungkin berbeda.
+    Lalu sebenarnya saya tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment. Namun, hal ini tidak disarankan karena dapat menyebabkan konflik dependensi antara proyek dan sistem. Selain itu, tanpa virtual environment, akan sulit untuk memastikan bahwa aplikasi yang saya buat akan berjalan dengan benar di lingkungan lain karena versi pustaka yang digunakan mungkin berbeda.
 
-4. 
+4. Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya.
 Berikut adalah penjelasan tentang MVC, MVT, dan MVVM:
-   1. MVC (Model-View-Controller): 
-    MVC adalah pola desain yang memisahkan aplikasi menjadi tiga komponen logis utama: Model, View, dan Controller. Model mencakup semua data dan logika terkait. View adalah struktur, tata letak, dan penampilan dari apa yang dilihat pengguna di layar. Controller bertindak sebagai antarmuka antara Model dan View. Controller menerima input pengguna dari View, memprosesnya (sering melibatkan perubahan pada Model), dan memperbarui View sesuai.
+   1. Membuat dan Aktifkan Virtual Environment
+        MVC adalah pola desain yang memisahkan aplikasi menjadi tiga komponen logis utama: Model, View, dan Controller. Model mencakup semua data dan logika terkait. View adalah struktur, tata letak, dan penampilan dari apa yang dilihat pengguna di layar. Controller bertindak sebagai antarmuka antara Model dan View. Controller menerima input pengguna dari View, memprosesnya (sering melibatkan perubahan pada Model), dan memperbarui View sesuai.  
 
    2. MVT (Model-View-Template): 
-    MVT adalah pola desain perangkat lunak yang digunakan oleh framework web Django. Model bertindak sebagai antarmuka data user. View adalah antarmuka pengguna — apa yang user lihat di browser user ketika merender situs web. Template terdiri dari bagian statis dari output HTML yang diinginkan serta beberapa sintaks khusus yang menjelaskan bagaimana konten dinamis akan dimasukkan.
+        MVT adalah pola desain perangkat lunak yang digunakan oleh framework web Django. Model bertindak sebagai antarmuka data user. View adalah antarmuka pengguna — apa yang user lihat di browser user ketika merender situs web. Template terdiri dari bagian statis dari output HTML yang diinginkan serta beberapa sintaks khusus yang menjelaskan bagaimana konten dinamis akan dimasukkan.
 
    3. MVVM (Model-View-ViewModel):  
-    Ini adalah turunan dari pola MVC di mana Controller digantikan oleh ViewModel. ViewModel bertindak sebagai antarmuka dan menyajikan data dari Model dengan cara yang lebih mudah untuk dikelola dan dipresentasikan di View. Sering digunakan dalam aplikasi yang memerlukan pengikatan data dari Model ke View. MVVM adalah pola arsitektur dalam perangkat lunak komputer yang memfasilitasi pemisahan pengembangan antarmuka pengguna grafis (GUI; view) dari pengembangan logika bisnis atau logika back-end (model) sehingga view tidak bergantung pada platform model tertentu.
+        Ini adalah turunan dari pola MVC di mana Controller digantikan oleh ViewModel. ViewModel bertindak sebagai antarmuka dan menyajikan data dari Model dengan cara yang lebih mudah untuk dikelola dan dipresentasikan di View. Sering digunakan dalam aplikasi yang memerlukan pengikatan data dari Model ke View. MVVM adalah pola arsitektur dalam perangkat lunak komputer yang memfasilitasi pemisahan pengembangan antarmuka pengguna grafis (GUI; view) dari pengembangan logika bisnis atau logika back-end (model) sehingga view tidak bergantung pada platform model tertentu.
 
-Perbedaan utama antara ketiganya adalah sebagai berikut:
-- Dalam MVC, controller adalah titik masuk ke Aplikasi, sedangkan dalam MVVM, view adalah titik masuk ke Aplikasi.
-- Dalam MVT, Django menggunakan template dalam kerangka kerjanya. Template bertanggung jawab untuk seluruh Antarmuka Pengguna sepenuhnya.
-- Dalam MVVM, ViewModel bertindak sebagai pengubah nilai, artinya ViewModel bertanggung jawab untuk mengekspos objek data dari Model sedemikian rupa sehingga objek dapat dengan mudah dikelola dan dipresentasikan.
+    Perbedaan utama antara ketiganya adalah sebagai berikut:
+    - Dalam MVC, controller adalah titik masuk ke Aplikasi, sedangkan dalam MVVM, view adalah titik masuk ke Aplikasi.
+    - Dalam MVT, Django menggunakan template dalam kerangka kerjanya. Template bertanggung jawab untuk seluruh Antarmuka Pengguna sepenuhnya.
+    - Dalam MVVM, ViewModel bertindak sebagai pengubah nilai, artinya ViewModel bertanggung jawab untuk mengekspos objek data dari Model sedemikian rupa sehingga objek dapat dengan mudah dikelola dan dipresentasikan.
 
-Django adalah framework pengembangan web yang mengikuti pola desain MVT (Model-View-Template). Berikut adalah bagaimana Django berhubungan dengan konsep-konsep ini:
-Model: Dalam Django, model adalah representasi dari basis data. Ini adalah tempat saya mendefinisikan struktur data saya, dan Django akan membuat tabel basis data untuk saya.
-View: View dalam Django bertanggung jawab untuk memproses permintaan dan meresponsnya dengan sebuah respons. View mengambil data dari model, menerapkan logika bisnis, dan kemudian meneruskannya ke template.
-Template: Template dalam Django adalah bagian yang menangani bagaimana situs web saya ditampilkan atau bagaimana ia tampak di browser. Template biasanya berisi HTML yang dicampur dengan sintaks template Django.
+    Django adalah framework pengembangan web yang mengikuti pola desain MVT (Model-View-Template). Berikut adalah bagaimana Django berhubungan dengan konsep-konsep ini:
+    Model: Dalam Django, model adalah representasi dari basis data. Ini adalah tempat saya mendefinisikan struktur data saya, dan Django akan membuat tabel basis data untuk saya.
+    View: View dalam Django bertanggung jawab untuk memproses permintaan dan meresponsnya dengan sebuah respons. View mengambil data dari model, menerapkan logika bisnis, dan kemudian meneruskannya ke template.
+    Template: Template dalam Django adalah bagian yang menangani bagaimana situs web saya ditampilkan atau bagaimana ia tampak di browser. Template biasanya berisi HTML yang dicampur dengan sintaks template Django.
 
-Jadi, meskipun Django menggunakan pola MVT, konsep-konsep ini mirip dengan MVC dan MVVM. Dalam semua kasus, tujuannya adalah untuk memisahkan logika aplikasi (Model) dari presentasinya (View/Template) dan bagaimana data diproses (Controller/ViewModel). Perbedaan utama adalah bagaimana kerangka kerja ini mengimplementasikan konsep-konsep ini.
+    Jadi, meskipun Django menggunakan pola MVT, konsep-konsep ini mirip dengan MVC dan MVVM. Dalam semua kasus, tujuannya adalah untuk memisahkan logika aplikasi (Model) dari presentasinya (View/Template) dan bagaimana data diproses (Controller/ViewModel). Perbedaan utama adalah bagaimana kerangka kerja ini mengimplementasikan konsep-konsep ini.
