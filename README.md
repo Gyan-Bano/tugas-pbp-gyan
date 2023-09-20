@@ -1,9 +1,10 @@
-"# tugas-pbp-gyan" 
+# TUGAS PEMROGRAMAN BERBASIS PLATFORM
 Gyanamurti Adhikara Bano
 2206082266
 
 link: https://libralogia.adaptable.app/
 
+## TUGAS 2
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step
     1. Membuat dan Aktifkan Virtual Environment
         Pada langkah pertama ini, saya akan membuat dan mengaktifkan virtual environment. Virtual environment adalah lingkungan terisolasi di komputer saya yang memungkinkan saya mengisolasi proyek Python dari proyek lain dan mengelola dependensi proyek secara terpisah. Ini memungkinkan saya untuk menjaga kebersihan dan independensi proyek saya. Saya dapat memulainya dengan membuka terminal atau command prompt di komputer saya dan navigasi ke direktori proyek yang ingin saya gunakan. Setelah berada di direktori tersebut, saya membuat virtual environment dengan perintah python -m venv myenv, di mana myenv adalah nama lingkungan virtual yang bisa saya ubah sesuai keinginan. Kemudian, saya mengaktifkan lingkungan virtual dengan menggunakan perintah yang sesuai untuk sistem operasi saya (dalam kasus ini Windows).
@@ -75,3 +76,76 @@ Berikut adalah penjelasan tentang MVC, MVT, dan MVVM:
     Template: Template dalam Django adalah bagian yang menangani bagaimana situs web saya ditampilkan atau bagaimana ia tampak di browser. Template biasanya berisi HTML yang dicampur dengan sintaks template Django.
 
     Jadi, meskipun Django menggunakan pola MVT, konsep-konsep ini mirip dengan MVC dan MVVM. Dalam semua kasus, tujuannya adalah untuk memisahkan logika aplikasi (Model) dari presentasinya (View/Template) dan bagaimana data diproses (Controller/ViewModel). Perbedaan utama adalah bagaimana kerangka kerja ini mengimplementasikan konsep-konsep ini.
+
+## TUGAS 3
+1. Apa perbedaan antara form POST dan form GET dalam Django?
+    - Form Post
+    Form POST adalah metode pengiriman data yang digunakan dalam pengembangan web, di mana data atau nilai dikirimkan langsung ke server. Kelebihan dari metode ini adalah data yang dikirimkan tidak ditampilkan di URL, sehingga lebih aman untuk mengirimkan data yang penting atau rahasia, seperti password. Dalam Django, form login dikembalikan menggunakan metode POST, di mana browser mengemas data formulir, mengenkodnya untuk transmisi, mengirimkannya ke server, dan kemudian menerima kembali responsnya. Metode POST menggunakan variabel $_POST untuk menampung data/nilai.
+
+    Form POST dapat dibayangkan seperti seorang kurir yang mengirimkan paket rahasia. Paket ini dikirim langsung ke tujuan tanpa orang lain tahu apa isinya, karena semua informasi penting disimpan dengan aman di dalam paket dan tidak ditampilkan di luar. Ini seperti saat kita mengirimkan password atau data penting lainnya melalui form login di Django. Browser kita akan mengemas data tersebut, mengenkodnya, dan mengirimkannya langsung ke server.
+
+    - Form Get
+    Di sisi lain, Form GET adalah metode lain yang digunakan dalam pengiriman data formulir. Berbeda dengan form POST, form GET menampilkan data yang dikirimkan dalam URL. Hal ini berarti bahwa data yang dikirimkan dapat dilihat oleh siapa saja yang melihat URL. Dengan metode GET, browser mengemas data yang dikirimkan menjadi string, dan menggunakan ini untuk membuat URL. Meskipun kurang aman dibandingkan dengan metode POST, metode GET sangat berguna untuk mengambil data dari server. Metode GET menggunakan variabel $_GET untuk menampung data/nilai.
+
+    Form GET seperti seorang pemandu wisata yang membawa kita berkeliling kota. Pemandu wisata ini akan menunjukkan semua tempat yang Anda kunjungi dan semua yang Anda lakukan akan tercatat dalam buku harian perjalanan Anda. Dalam hal ini, buku harian perjalanan adalah URL kita. Semua data yang dikirimkan akan ditampilkan di URL. Meskipun ini mungkin tidak seaman metode POST, metode GET sangat berguna saat kita hanya perlu mengambil data dari server.
+
+2. Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
+    - XML (Extensible Markup Language)
+    XML adalah bahasa markup yang digunakan untuk membuat dokumen yang dapat dibaca oleh manusia maupun mesin. XML biasanya digunakan untuk mengirim data yang kompleks dan sangat terstruktur seperti dokumen atau laporan keuangan. Selain itu, XML juga sering digunakan untuk pertukaran data dalam aplikasi bisnis dan enterprise. XML memerlukan lebih banyak spasi memori daripada JSON, karena XML memiliki tag yang membungkus setiap elemen datanya dan tag tersebut memakan ruang.
+    
+    - JSON (JavaScript Object Notation)
+    JSON adalah format data ringkas dan ringan yang digunakan untuk pertukaran data antar client dan server. Sama halnya dengan XML, JSON juga dapat digunakan untuk mengirim data yang kompleks seperti struktur data dari REST API2. Meskipun terkesan ringan dan mudah digunakan, JSON memiliki keamanan data yang lebih baik dibandingkan XML. JSON dianggap lebih efisien karena data direpresentasikan sebagai objek JavaScript, dan dengan demikian beberapa bit dilewatkan melalui kabel. Lebih sedikit waktu mesin diperlukan untuk pemrosesan data.
+
+    - HTML (HyperText Markup Language)
+    HTML adalah bahasa markup standar untuk dokumen yang dirancang untuk ditampilkan di browser web. HTML tidak dirancang untuk pertukaran data, tetapi untuk menampilkan data dengan fokus pada bagaimana data tampak bagi pengguna akhir. HTML menggunakan tag untuk membuat elemen seperti teks, gambar, dan hyperlink lainnya menjadi output yang dapat ditampilkan oleh browser web.
+
+3. Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+    Ada beberapa alasan yang mendasari penggunaan JSON dalam pertukaran data antara aplikasi web modern.
+    - Ringan: JSON adalah format yang ringan, yang berarti membutuhkan lebih sedikit bandwidth dan mempercepat waktu transmisi data.
+    - Mudah Dibaca dan Ditulis: JSON mudah dibaca dan ditulis oleh manusia, yang memudahkan pengembang dalam memahami dan menganalisis data selama proses pengembangan dan debugging.
+    - Mudah Dipahami oleh Mesin: JSON mudah dipahami oleh mesin, yang memungkinkan data JSON diolah dengan mudah di berbagai platform.
+    - Fleksibilitas dalam Representasi Data: JSON dapat merepresentasikan berbagai jenis data dengan format yang konsisten, termasuk tipe data dasar seperti string, angka, boolean, serta struktur yang lebih kompleks seperti objek dan array.
+    - Kompatibilitas Lintas Platform: JSON didukung oleh sebagian besar bahasa pemrograman modern, sehingga data dalam format JSON dapat dengan mudah diolah dan dimanipulasi di berbagai platform dan lingkungan.
+    - Efisiensi dalam Pertukaran Data: Karena format JSON bersifat ringan dan terstruktur, data dapat dikirim dengan cepat melalui jaringan dan diurai dengan mudah oleh klien.
+    - Struktur Kode yang Lebih Sederhana: Berbeda dengan XML dan format lainnya yang memiliki fungsi serupa, JSON memiliki struktur data yang sederhana dan mudah dipahami.
+    - Pertukaran Data yang Efisien: Salah satu fungsi utama JavaScript Object Notation adalah untuk memfasilitasi pertukaran data yang efisien antara server dan klien.
+
+    Secara keseluruhan, JSON adalah format data yang kuat dan serbaguna yang cocok untuk berbagai aplikasi, termasuk pertukaran data antara aplikasi web modern.
+
+4.  Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step
+    - Membuat Forms.py dan Mendefinisikan Form
+    Pertama, saya akan membuat file forms.py dalam proyek web saya. Di sini, saya mendefinisikan sebuah form yang akan digunakan untuk mengambil input dari pengguna. Form ini biasanya mengambil atribut dari model yang telah saya definisikan dalam models.py. Ini memungkinkan saya untuk mengumpulkan data dari pengguna.
+    - Migrasi Basis Data
+    Sebelum saya dapat menggunakan model baru atau menerapkan perubahan lainnya pada basis data, saya perlu menjalankan perintah migrate untuk memigrasikan perubahan tersebut ke dalam basis data.   
+    - Membuat Fungsi untuk Merender Formulir
+    Selanjutnya, saya akan membuat fungsi di dalam file views.py yang saya sebut create_product. Fungsi ini bertujuan untuk merender tampilan formulir yang telah saya buat sebelumnya. Ini memungkinkan pengguna untuk mengisi formulir dan menambahkan produk baru ke dalam basis data.
+    - Membuat Template HTML untuk Formulir
+    Saya akan membuat sebuah file HTML yang akan digunakan sebagai template untuk formulir yang akan dirender oleh fungsi create_product. Dalam file HTML ini, saya akan menambahkan kode HTML yang sesuai untuk menampilkan formulir dengan bidang yang diperlukan.
+    - Membuat Tombol atau Tautan pada Halaman Utama
+    Di dalam file HTML utama saya, saya akan menambahkan tombol atau tautan yang akan mengarahkan pengguna ke halaman yang berisi formulir untuk menambahkan produk.    
+    - Membuat Fungsi untuk Format XML dan JSON
+    Saya akan membuat empat fungsi tambahan di dalam views.py untuk menampilkan data dalam format XML dan JSON. Fungsi-fungsi ini akan menggunakan serializer untuk mengubah data dari basis data ke dalam format XML dan JSON sesuai dengan kebutuhan.
+    - Fungsi untuk Data per ID
+    Untuk mengambil data berdasarkan ID tertentu, saya akan membuat fungsi yang serupa dengan fungsi sebelumnya untuk melihat data dalam format XML dan JSON. Namun, kali ini saya akan menerapkan filter untuk mengambil data berdasarkan primary key (ID) yang diinginkan.
+    - Routing URL
+    Setelah membuat fungsi-fungsi tersebut, saya akan menambahkan rute (URL) untuk masing-masing fungsi ke dalam file urls.py. Ini akan mengaitkan URL dengan fungsi yang sesuai dalam views.py.
+    - Pengujian Lokal
+    Setelah melakukan routing, saya dapat menguji masing-masing fungsi dengan menjalankan aplikasi saya secara lokal di komputer. Saya akan mengakses halaman-halaman yang telah saya buat untuk melihat, menambahkan, dan mengakses data dalam format HTML, XML, dan JSON sesuai dengan fungsinya.
+
+    Screnshoot:
+    - HTML Main:
+    ![Screenshot HTML Gyan](https://github.com/Gyan-Bano/tugas-pbp-gyan/assets/124954416/d3a2d281-200e-48cb-b16b-e17623cab880)
+    - HTML Create Product:
+    ![Screenshot HTML Create Product Gyan](https://github.com/Gyan-Bano/tugas-pbp-gyan/assets/124954416/cf6bd52d-172d-44e9-b44d-0d7206696769)
+    - XML:
+    ![Screenshot XML Gyan](https://github.com/Gyan-Bano/tugas-pbp-gyan/assets/124954416/895e299c-9ecf-4fc7-8760-a58be0672724)
+    - JSON:
+    ![Screenshot JSON Gyan](https://github.com/Gyan-Bano/tugas-pbp-gyan/assets/124954416/af27aeb3-0546-46c0-8af9-25cbee382947)
+    - XML ID:
+    ![Screenshot XML Gyan ID](https://github.com/Gyan-Bano/tugas-pbp-gyan/assets/124954416/97fc40ef-d572-4db8-a8ca-cd2890773929)
+    - JSON ID:
+    ![Screenshot JSON Gyan ID](https://github.com/Gyan-Bano/tugas-pbp-gyan/assets/124954416/eab23c67-7ee1-472a-a6cb-400bb49b0f6e)
+
+
+
+
