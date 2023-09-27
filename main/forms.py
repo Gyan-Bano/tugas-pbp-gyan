@@ -1,5 +1,9 @@
 from django.forms import ModelForm
 from main.models import Product
+from django import forms
+
+class StockUpdateForm(forms.Form):
+    action = forms.CharField(widget=forms.HiddenInput())
 
 class ProductForm(ModelForm):
     class Meta:

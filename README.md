@@ -146,6 +146,117 @@ Berikut adalah penjelasan tentang MVC, MVT, dan MVVM:
     - JSON ID:
     ![Screenshot JSON Gyan ID](https://github.com/Gyan-Bano/tugas-pbp-gyan/assets/124954416/eab23c67-7ee1-472a-a6cb-400bb49b0f6e)
 
+## TUGAS 4
+Untuk tugas 4 saya membuat dua akun:
+- Akun pertama, username: testakun1, password: Abcd1234!, Akun inventori ini berisi buku kalkulus purcell.
+- Akun pertama, username: testakun2, password: ABcd1234!, Akun inventori ini berisi buku laskar pelangi dan buku harry potter dan batu bertuah.
+1. Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
+Django UserCreationForm adalah formulir yang digunakan untuk membuat pengguna baru dalam aplikasi web Django. Formulir ini terdiri dari tiga bidang yang meliputi username, password1, dan password2 (pada dasarnya digunakan untuk konfirmasi dari password1).
 
+Kelebihan:
+- Django UserCreationFOrm adalah bagian dari sistem otentikasi pengguna bawaan Django yang dirancang untuk memenuhi kebutuhan umum proyek.
+- Formulir ini memudahkan pembuatan pengguna baru dengan otentikasi dan validasi password.
+- Django UserCreationForm memiliki fungsi save() yang memungkinkan penyimpan instance pengguna ke dalam database.
+- Validasi yang kuat. Django UserCreationForm melakukan validasi yang kuat terhadap input pengguna, seperti memastikan bahwa password memiliki panjang minimal 8 karakter dan tidak mengandung karakter khusus.
 
+Kekurangan: 
+- Tidak dapat digunakan untuk membuat pengguna dengan model custom. Jika kita menggunakan model custom untuk pengguna, maka kita perlu membuat form custom sendiri.
+- Tidak dapat digunakan untuk membuat pengguna dengan izin khusus. Jika kita ingin membuat pengguna dengan izin khusus, maka kita perlu menambahkan kode tambahan ke aplikasi.
 
+2. Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+Autentikasi adalah proses verivikasi identitas pengguna. Autentikasi akan memastikan bahwa pengguna adalah siapa saja yang mereka klaim. Misalkan ketika pengguna mencoba masuk untuk login ke aplikasi web, sistem akan meminta username dan password. Sistem kemudian akan memeriksa apakah kombinasi username dan password pengguna tersebut valid.
+
+Di sisi lain, otorisasi adalah proses penentuan apa yang dapat dilakukan oleh pengguna yang telah diautentikasi sebelumnya. Misalnya, beberapa pengguna mungkin memiliki izin untuk mengakses halaman tertentu ataupun melakukan tindakan tertentu (seperti mengedit atau menghapus objek dari inventori), sementara pengguna lain mungkin tidak.
+
+Kedua konsep ini penting karena mereka membantu menjaga keamanan aplikasi web. Autentikasi membantu mencegah akses yang tidak sah dengan memastikan bahwa hanya pengguna yang memiliki kredensial yang valid yang dapat masuk ke sistem. Sementara itu, otorisasi membantu mencegah penyalahgunaan sistem dengan membatasi apa yang dapat dilakukan oleh setiap pengguna.
+
+3. Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+
+Cookie adalah file teks kecil yang disimpan di komputer pengguna oleh situs web yang mereka kunjungi. Cookie dapat digunakan untuk menyimpan berbagai macam informasi, seperti pengaturan pengguna, preferensi, atau status login.
+
+Dalam konteks aplikasi web, cookie dapat digunakan untuk mengelola data sesi pengguna. Sesi adalah periode waktu di mana pengguna berinteraksi dengan situs web. Selama sesi, pengguna dapat melakukan berbagai tindakan, seperti login, menambahkan item ke keranjang belanja, atau membuat komentar.
+
+Django menggunakan cookie untuk menyimpan ID sesi pengguna. ID sesi adalah nilai unik yang digunakan untuk mengidentifikasi pengguna selama sesi. Django menggunakan ID sesi untuk menyimpan informasi tentang pengguna, seperti status login, pengaturan, dan preferensi. Berikut adalah contoh Django menggunakan cookie untuk mengelola data sesi pengguna:
+- Saat pengguna login, Django akan membuat ID sesi baru dan menyimpannya di cookie.
+- Setiap kali pengguna mengirimkan permintaan ke situs web, Django akan memeriksa cookie untuk ID sesi.
+- Jika ID sesi ditemukan, Django akan menggunakan ID sesi tersebut untuk mengidentifikasi pengguna.
+- Django akan menggunakan ID sesi untuk menyimpan informasi tentang pengguna, seperti status login, pengaturan, dan preferensi.
+
+Dengan menggunakan cookie, Django dapat mengelola data sesi pengguna dengan cara yang efisien dan aman.
+
+4. Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+Penggunaan cookie secara default relatif aman dalam pengembangan web, tetapi ada beberapa risiko potensial yang harus diwaspadai, antara lain:
+- Kebocoran data, cookie dapat berisi informasi yang sensitif misalkan nama pengguna, kata sandi, atau informasi sensitif lainnya. Jika cookie diretas, informasi sensitif ini dapat jatuh ke tangan orang yang tidak berwenang, terutama saat dikirimkan dengan koneksi HTTP yang tidak aman. 
+- Pelacaakan pengguna, cookie dapat digunakan untuk melacak perilaku pengguna pada situs web. Pelacakan ini dapat digunakan untuk menargetkan iklan atau untuk mengumpulkan data tentang pengguna. 
+- Keamanan, cookie rentan terhadap serangan seperti cross-site scripting (XSS) dan session hijacking.
+Oleh karena itu, ada beberapa cara untuk menggunakan cookie secara aman:
+- Gunakan cookie hanya untuk menyimpan informasi yang diperlukan.
+Mengenkripsi cookie, gunakan prokol enkripsi yang kuat, seperti HTTPS, untuk melindungi cookie dari penyadapan.
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+- Membuat fungsi Register: Untuk membuat fungsi registrasi, hal pertama yang saya lakukan adalah menambahkan beberapa import library, salah satunya UserCreationForm pada view.py di directory main,lalu saya membuat fungsi register di dalamnya.
+```
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+```
+Fungsinya adalah untuk memungkinkan pembuatan akun pengguna setelah pengguna mengeklik tombol "submit" di halaman web. Setelah menambahkan fungsi ini, langkah selanjutnya adalah membuat berkas HTML yang disebut register.html dalam direktori main/templates untuk mengatur tampilan halaman pendaftaran. Langkah terakhir adalah menghubungkan jalur (path) dalam file "urls.py" yang terletak di direktori main"dengan fungsi pendaftaran tersebut.
+- Membuat fungsi Login: Selanjutnya saya melanjutkan dengan membuat fungsi login dengan import library authenticate dan login  yang juga dilakukan pada views.py.
+```
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('main:show_main')
+        else:
+            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+    context = {}
+    return render(request, 'login.html', context)
+```
+
+Fungsinya adalah untuk memungkinkan pengguna untuk login dengan mengidentifikasi mereka melalui nama pengguna dan kata sandi yang mereka masukkan. Setelah itu, saya membuat berkas HTML bernama login.html di dalam folder main/templates untuk mengatur tampilan halaman login. Terakhir, saya menambahkan jalur (path) dalam file urls.py di direktori main yang mengarah ke fungsi login tersebut.
+
+Agar hanya pengguna yang sudah login yang dapat mengakses halaman utama, saya menambahkan aturan dengan menggunakan @login_required(login_url='/login').
+
+- Membuat fungsi Logout: 
+Untuk membuat fungsi logout, langkah-langkahnya serupa dengan pembuatan fungsi Register, yaitu dengan mengimpor library logout ke dalam views.py.
+```
+def logout_user(request):
+    logout(request)
+    return redirect('main:login')
+```
+
+Kemudian, saya membuat fungsi logout di views.py yang berperan dalam menghapus sesi login pengguna dan mengalihkan mereka kembali ke halaman login. Pada halaman utama (main page), saya menambahkan tombol logout. Terakhir, saya menambahkan jalur (path) dalam file urls.py di direktori "main" yang menghubungkan ke fungsi logout ini.
+- Menggunakan cookies untuk last login: Dalam fungsi show_main di views.py, saya mengubah bagian "Name" dalam konteks menjadi request.user.username untuk membuat nama di halaman utama menjadi dinamis dan sesuai dengan pengguna yang terotorisasi. Selanjutnya, untuk menerapkan cookies yang berisi informasi waktu terakhir login di halaman utama, saya menambahkan kode response.set_cookie('last_login', str(datetime.datetime.now())). Hal ini bertujuan untuk membuat dan menambahkan cookie bernama last_login pada respons.
+
+Selain itu, saya juga memodifikasi fungsi logout_user untuk menghapus cookie last_login saat pengguna logout. Terakhir, untuk menampilkan data waktu terakhir login di halaman utama, saya memodifikasi berkas main.html dan menambahkan data last_login ke dalam konteks pada fungsi show_main.
+- Menghubungkan product dengan user: Tujuannya dalam menghubungkan Item dengan User adalah untuk memastikan bahwa setiap pengguna hanya memiliki akses ke Item yang mereka tambahkan ke dalam akun mereka sendiri. Dalam berkas models.py, saya menambahkan kode user = models.ForeignKey(User, on_delete=models.CASCADE) yang digunakan untuk membuat koneksi antara satu pengguna dengan Item, sehingga Item yang dikaitkan dengan pengguna tersebut dapat diidentifikasi sebagai milik pengguna yang melakukan permintaan untuk menambahkan produk.
+
+Selanjutnya pada views.py untuk memfilter produk saya menambahkan kode  products = Product.objects.filter(user=request.user) agar produk yang muncuk sesuai dengan akun user, lalu pada fungsi create_product dimodifikasi dengan kode 
+```
+def create_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST or None, request.FILES)
+        if form.is_valid():
+            form.save()
+            product = form.save(commit=False)
+            product.user = request.user
+            product.save()
+            return redirect('main:show_main')  
+    else:
+        form = ProductForm()
+    
+    context = {'form': form}
+    return render(request, 'create_product.html', context)
+```
+- Pengumpulan: Setelah saya melakukan semua langkah - langkah tersebut untuk membuat mekanisme login, logout, pembuatan akun, serta penggunaan cookies saya melakukan add, commit, dan push ke repositori github yang saya buat pada branch baru.

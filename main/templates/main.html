@@ -4,8 +4,16 @@
 {% block content %}
     <header>
         <h1>{{app_name}} - Perpustakaan Ilmu Pengetahuan</h1>
-        <h6>by: {{name}}</h6>
+        <h6>by: Gyanamurti Adhikara Bano</h6>
+        <h6>nama: {{name}}</h6>
         <h6>kelas: {{class}}</h6>
+
+        <a href="{% url 'main:logout' %}">
+            <button>
+                Logout
+            </button>
+        </a>
+        <h5>Sesi terakhir login: {{ last_login }}</h5>
     </header>
     <main>
         <section class="add-collection">
@@ -13,6 +21,8 @@
             <a href="{% url 'main:create_product' %}">
                 <button id="addCollectionButton">Tambah Koleksi Buku</button>
             </a>
+
+
         </section>
         <section class="stock-control">
             <h2>Stok Buku</h2>
@@ -57,9 +67,24 @@
                                 <td style="padding: 10px; border: 1px solid #ccc;">{{ product.rating }}/5</td>
                                 <td style="padding: 10px; border: 1px solid #ccc;">{{ product.amount }}</td>
                                 <td style="padding: 10px; border: 1px solid #ccc;">
-                                    <button class="increase-stock">+</button>
-                                    <button class="decrease-stock">-</button>
-                                </td>
+                                    {% with button_label="Delete" %}
+                                    <form method="post" action="{% url 'main:increase_stock' product.id %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="increase">
+                                        <button type="submit" style="width: {{ button_label|length }}ch; text-align: center; display: inline-flex; align-items: center; justify-content: center;">+</button>
+                                    </form>
+                                    <form method="post" action="{% url 'main:decrease_stock' product.id %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="decrease">
+                                        <button type="submit" style="width: {{ button_label|length }}ch; text-align: center; display: inline-flex; align-items: center; justify-content: center;">-</button>
+                                    </form>
+                                    <form method="post" action="{% url 'main:delete_product' product.id %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="delete">
+                                        <button type="submit" style="width: {{ button_label|length }}ch; text-align: center; display: inline-flex; align-items: center; justify-content: center;">Delete</button>
+                                    </form>
+                                    {% endwith %}
+                                </td>                                               
                                 <td style="padding: 10px; border: 1px solid #ccc; font-size: smaller;">{{ product.date_added }}</td>
                             </tr>
                         {% endfor %}
