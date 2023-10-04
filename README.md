@@ -260,3 +260,85 @@ def create_product(request):
     return render(request, 'create_product.html', context)
 ```
 - Pengumpulan: Setelah saya melakukan semua langkah - langkah tersebut untuk membuat mekanisme login, logout, pembuatan akun, serta penggunaan cookies saya melakukan add, commit, dan push ke repositori github yang saya buat pada branch baru.
+
+## TUGAS 5
+1. Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+Dalam CSS, selector digunakan untuk memilih elemen HTML yang ingin kita beri style. Ada beberapa jenis selector, dan berikut adalah penjelasan dan manfaat dari masing-masing:
+- Element Selector: Selector ini memilih elemen berdasarkan nama elemen HTML. Misalnya, p { color: red; } akan menerapkan warna merah ke semua elemen <p>. Manfaatnya adalah dapat mengubah style semua elemen dengan jenis yang sama sekaligus. Ini dapat digunakan saat kita ingin menerapkan style yang sama ke semua elemen dengan jenis yang sama.
+- Class Selector: Selector ini memilih elemen berdasarkan nilai atribut class. Misalnya, .myClass { color: red; } akan menerapkan warna merah ke semua elemen dengan class “myClass”. Manfaatnya adalah dapat mengubah style beberapa elemen sekaligus tanpa harus sama jenisnya.Ini dapat digunakan saat kita ingin menerapkan style yang sama ke beberapa elemen yang berbeda.
+- ID Selector: Selector ini memilih elemen berdasarkan nilai atribut id. Misalnya, #myID { color: red; } akan menerapkan warna merah ke elemen dengan id “myID”. Manfaatnya adalah dapat mengubah style satu elemen spesifik. Ini dapat digunakan saat kita ingin menerapkan style khusus ke satu elemen saja.
+- Attribute Selector: Selector ini memilih elemen berdasarkan atribut dan nilai atributnya. Misalnya, input[type="text"] { color: red; } akan menerapkan warna merah ke semua elemen input dengan tipe “text”. Manfaatnya adalah dapat mengubah style elemen berdasarkan atributnya. Ini dapat digunakan saat kita ingin menerapkan style ke elemen dengan atribut tertentu.
+- Pseudo-class Selector: Selector ini memilih elemen berdasarkan status tertentu, seperti hover, focus, atau checked. Misalnya, a:hover { color: red; } akan menerapkan warna merah ke link saat mouse diarahkan ke atasnya. Manfaatnya adalah dapat mengubah style elemen berdasarkan interaksi pengguna atau status tertentu. Ini dapat digunakan saat kita ingin memberikan feedback visual kepada pengguna saat mereka berinteraksi dengan elemen.
+- Pseudo-element Selector: Selector ini memilih bagian spesifik dari elemen, seperti ::before atau ::after. Misalnya, p::first-line { color: red; } akan menerapkan warna merah ke baris pertama dari setiap paragraf. Manfaatnya adalah dapat mengubah style bagian spesifik dari suatu elemen. Ini dapat digunakan saat kita ingin menambah atau mengubah style bagian tertentu dari suatu elemen.
+2. Jelaskan HTML5 Tag yang kamu ketahui.
+Berikut adalah beberapa contoh dari HTML5 Tag yang sering digunakan dalam pengembangan web:
+- ```<!DOCTYPE html>```: Ini bukan tag sebenarnya, tetapi deklarasi dokumen yang digunakan untuk menandakan bahwa halaman web adalah halaman HTML5. Ini diletakkan di bagian atas halaman HTML.
+- ```<html>```: Tag ini membungkus seluruh halaman HTML dan menandakan awal dari dokumen HTML.
+- ```<head>```: Bagian ini berisi informasi meta mengenai halaman, tautan ke file eksternal (seperti CSS dan JavaScript), judul halaman, dan informasi metadata lainnya.
+- ```<meta>```: Digunakan untuk menyisipkan metadata ke dalam halaman web, seperti karakter encoding, deskripsi halaman, dan panduan penjelajahan.
+- ```<title>```: Digunakan untuk menentukan judul halaman web yang akan ditampilkan di bilah judul browser atau tab.
+- ```<link>```: Digunakan untuk menghubungkan dokumen HTML dengan file eksternal, seperti file CSS untuk styling.
+- ```<style>```: Ini adalah tag yang digunakan untuk menambahkan CSS langsung ke dalam halaman HTML. Biasanya ditempatkan dalam bagian ```<head>```.
+- ```<script>```: Tag ini digunakan untuk menambahkan kode JavaScript ke dalam halaman HTML.
+- ```<body>```: Bagian utama halaman web yang berisi konten yang akan ditampilkan kepada pengguna, seperti teks, gambar, tautan, dan elemen-elemen lainnya.
+- ```<header>```: Ini adalah elemen yang biasanya digunakan untuk bagian atas halaman atau bagian kepala halaman web, yang sering berisi judul, logo, tautan navigasi, dan elemen-elemen lainnya.
+- ```<nav>```: Digunakan untuk mengelompokkan tautan navigasi ke dalam sebuah menu. Biasanya digunakan di bagian header atau footer.
+- ```<main>```: Menunjukkan konten utama dalam halaman web, yang harus ada dalam setiap halaman HTML5.
+- ```<h1>``` sampai ```<h6>```: Mendefinisikan judul.
+- ```<p>```: Mendefinisikan paragraf.
+- ```<a>```: Membuat hyperlink.
+- ```<section>```: Digunakan untuk mengelompokkan konten yang memiliki hubungan tematik dalam halaman, seperti bab dalam buku atau blok artikel dalam blog.
+- ```<article>```: Mendefinisikan sebuah artikel independen yang dapat berdiri sendiri dalam halaman web, seperti sebuah posting blog atau berita.
+- ```<img>```: Digunakan untuk menambahkan gambar.
+- ```<video>``` dan ```<audio>```: Digunakan untuk menambahkan media video dan audio.
+- ```<aside>```: Digunakan untuk konten yang terkait dengan konten di sekitarnya, tetapi bukan bagian integral dari konten utama, seperti sidebar.
+- ```<footer>```: Biasanya digunakan di bagian bawah halaman web dan berisi informasi penulis, tautan ke halaman terkait, atau informasi hak cipta.
+- ```<table>```: Digunakan untuk membuat tabel.
+- ```<div>```: Meskipun ini bukan elemen HTML5, ```<div>``` masih sering digunakan untuk mengelompokkan dan mengatur elemen-elemen HTML untuk tujuan styling dan pemrograman.
+3. Jelaskan perbedaan antara margin dan padding.
+Margin dan padding adalah dua properti penting dalam CSS yang digunakan untuk mengatur tata letak elemen-elemen HTML di dalam halaman web. Mereka memiliki perbedaan yang signifikan dalam cara mereka memengaruhi tata letak elemen-elemen tersebut:
+Margin:
+- Margin adalah jarak di luar elemen: Margin adalah ruang di luar batas luar elemen HTML. Margin digunakan untuk mengatur jarak antara elemen tersebut dan elemen-elemen di sekitarnya, baik vertikal maupun horizontal.
+- Margin tidak memiliki latar belakang atau warna: Margin adalah area transparan, yang berarti elemen-elemen di belakangnya akan terlihat melalui area margin. Kita tidak dapat memberikan warna atau latar belakang pada margin.
+Padding:
+- Padding adalah ruang di dalam elemen: Padding adalah ruang di dalam batas elemen HTML. Padding digunakan untuk mengatur jarak antara konten elemen dan batasnya sendiri, baik vertikal maupun horizontal.
+- Padding dapat memiliki latar belakang atau warna: Padding adalah area yang dapat memiliki warna atau latar belakang. Kita dapat memberikan warna atau latar belakang pada padding, yang akan mempengaruhi area di sekitar konten elemen.
+Perbedaan utama antara margin dan padding adalah lokasi mereka di sekitar elemen dan apakah mereka dapat memiliki latar belakang atau tidak. Margin digunakan untuk mengatur jarak di luar elemen, sementara padding digunakan untuk mengatur jarak di dalam elemen. Kita dapat memanfaatkan keduanya secara bersamaan untuk mengontrol tata letak dan tampilan elemen-elemen di halaman web Kita.
+4. Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+Tailwind CSS dan Bootstrap adalah dua framework CSS yang populer dan sering digunakan dalam pengembangan web. Mereka memiliki pendekatan yang berbeda dalam cara mereka memungkinkan pengembang untuk merancang tampilan dan tata letak halaman web. 
+Tailwind CSS:
+Konsep Dasar: Tailwind CSS adalah framework CSS "utility-first," yang berarti ia memberikan sejumlah besar kelas utilitas yang memungkinkan kita merancang tampilan dengan menggabungkan kelas-kelas ini dalam HTML. kita membangun tampilan dari komponen-komponen kecil menggunakan kelas-kelas ini.
+
+Kustomisasi yang Lebih Luas: Tailwind memungkinkan tingkat kustomisasi yang lebih besar dibandingkan dengan Bootstrap. Kita dapat dengan mudah menyesuaikan tampilan dengan mengedit file konfigurasi Tailwind atau menambahkan kelas-kelas tambahan.
+
+Ukuran yang Lebih Kecil: Tailwind cenderung menghasilkan ukuran file CSS yang lebih kecil dibandingkan dengan Bootstrap karena hanya mengompilasi kelas yang digunakan dalam proyek kita.
+
+Kesulitan Pembelajaran: Tailwind memiliki kurva pembelajaran yang mungkin lebih tinggi karena kita perlu memahami banyak kelas utilitas dan cara menggabungkannya.
+
+Bootstrap:
+
+Komponen yang Lebih Kaya: Bootstrap menyediakan kumpulan komponen siap pakai, seperti navbar, card, modal, dll. Ini mempermudah pengembangan jika kita ingin menggunakan komponen-komponen ini tanpa harus merancang ulang.
+
+Desain Responsif: Bootstrap dirancang dengan responsif dalam pikiran dan menyediakan grid system yang kuat serta kelas-kelas yang mendukung tata letak responsif.
+
+Keseluruhan Desain yang Konsisten: Bootstrap menyediakan desain yang konsisten dan estetika yang baik secara default. Ini bisa menjadi pilihan yang baik jika kita ingin tampilan yang konsisten tanpa banyak penyesuaian.
+
+Kurva Pembelajaran yang Lebih Cepat: Bootstrap mungkin memiliki kurva pembelajaran yang lebih cepat karena kita perlu memahami lebih sedikit kelas-kelas daripada Tailwind.
+
+Kapan sebaiknya menggunakan Bootstrap:
+- Jika kita membutuhkan komponen-komponen yang kaya dan siap pakai.
+- Jika kita ingin desain yang konsisten dan estetika yang baik tanpa banyak penyesuaian.
+- Jika kita ingin pengembangan yang lebih cepat dengan kurva pembelajaran yang lebih mudah.
+Kapan sebaiknya menggunakan Tailwind CSS:
+- Jika kita ingin tingkat kustomisasi yang tinggi dan lebih kontrol atas tampilan kita.
+- Jika kita ingin menghasilkan ukuran file CSS yang lebih kecil.
+- Jika kita siap untuk memahami dan menggunakan kelas-kelas utilitas yang banyak.
+- Pilihan antara Tailwind CSS dan Bootstrap tergantung pada kebutuhan proyek kita, tingkat kustomisasi yang kita butuhkan, dan preferensi pribadi kita dalam pengembangan web.
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+Dikarenakan pada tugas sebelumnya saya sudah menambahkan beberapa fitur seperti delete product serta penambahan serta pengurangan item stock, pada tugas ini saya melanjutkannya dengan beberapa hal yang dimulai dari:
+- Penambahan Framework Bootstrap: Saya memulai dengan menambahkan framework Bootstrap ke seluruh halaman aplikasi. Hal ini dilakukan dengan memasukkan tautan ke file CSS dan JavaScript Bootstrap di dalam tag ```<head>```.
+- Penyusunan Konten yang Lebih Menarik: Selanjutnya, saya mengatur ulang tampilan konten pada setiap halaman agar terlihat lebih menarik. Dengan menggunakan kelas-kelas Bootstrap, seperti margin dan padding, saya memberikan tampilan yang lebih terstruktur dan estetis pada halaman-halaman tersebut.
+- Penggantian Tabel dengan Card: Untuk meningkatkan tampilan aplikasi, saya memutuskan untuk mengganti elemen tabel yang sebelumnya digunakan dengan elemen card dari Bootstrap. Ini memberikan tampilan yang lebih modern, bersih, dan lebih sesuai dengan tren desain saat ini.
+- Pemberian Warna pada Inventori Terakhir: Agar objek inventori terakhir lebih mudah dikenali, saya menambahkan logika untuk memberikan warna berbeda pada card tersebut. Dengan menggunakan {% if forloop.last %}...{% endif %}, saya menerapkan properti-properti CSS khusus ke card terakhir dalam daftar.
+- Penambahan Navbar: Untuk meningkatkan navigasi dan kenyamanan pengguna, saya menambahkan navbar ke setiap halaman, kecuali halaman login dan registrasi. Navbar ini menyediakan akses cepat ke berbagai fitur penting seperti tombol log out dan tombol tambah koleksi buku.
+- Penggunaan JavaScript untuk Toggle Informasi Tambahan: Terakhir, saya menggunakan JavaScript untuk membuat tombol "Show More" yang dapat mengontrol visibilitas informasi tambahan pada setiap card. Dengan mengklik tombol ini, pengguna dapat dengan mudah melihat atau menyembunyikan detail tambahan, serta tampilan card akan lebih bersih karena tidak semua elemen langsung ditampilkan diawal.

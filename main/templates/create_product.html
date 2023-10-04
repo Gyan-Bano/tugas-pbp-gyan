@@ -1,9 +1,9 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<h1>Tambah Koleksi Buku</h1>
+<h1 style="padding-top: 50px;">Tambah Koleksi Buku</h1>
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" >
     {% csrf_token %}
     <table>
         {{ form.as_table }}

@@ -2,103 +2,115 @@
 {% load static %}
 
 {% block content %}
-    <header>
-        <h1>{{app_name}} - Perpustakaan Ilmu Pengetahuan</h1>
-        <h6>by: Gyanamurti Adhikara Bano</h6>
-        <h6>nama: {{name}}</h6>
-        <h6>kelas: {{class}}</h6>
-
-        <a href="{% url 'main:logout' %}">
-            <button>
-                Logout
-            </button>
-        </a>
-        <h5>Sesi terakhir login: {{ last_login }}</h5>
-    </header>
-    <main>
-        <section class="add-collection">
-            <h2>Tambah Koleksi Buku</h2>
-            <a href="{% url 'main:create_product' %}">
-                <button id="addCollectionButton">Tambah Koleksi Buku</button>
-            </a>
+<header style="padding-top: 50px;">
+    <h1>{{ app_name }} - Perpustakaan Ilmu Pengetahuan</h1>
+    <h6>by: Gyanamurti Adhikara Bano</h6>
+    <h6>nama: {{ name }}</h6>
+    <h6>kelas: {{ class }}</h6>
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+</header>
 
 
-        </section>
-        <section class="stock-control">
-            <h2>Stok Buku</h2>
-            <p>Total Stok Buku: <span id="totalStock">{{ total_stock }}</span></p>
-        </section>
-        <section class="book-list">
-            <h2>Koleksi Buku</h2>
-            <div style="overflow-x: auto; margin-bottom: 20px;">
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            <th style="padding: 10px; border: 1px solid #ccc;">Nama</th>
-                            <th style="padding: 10px; border: 1px solid #ccc;">Gambar</th>
-                            <th style="padding: 10px; border: 1px solid #ccc;">Penulis</th>
-                            <th style="padding: 10px; border: 1px solid #ccc;">Tahun Terbit</th>
-                            <th style="padding: 10px; border: 1px solid #ccc;">Penerbit</th>
-                            <th style="padding: 10px; border: 1px solid #ccc;">Genre</th>
-                            <th style="padding: 10px; border: 1px solid #ccc;">Deskripsi</th>
-                            <th style="padding: 10px; border: 1px solid #ccc;">Rating</th>
-                            <th style="padding: 10px; border: 1px solid #ccc;">Stok</th>
-                            <th style="padding: 10px; border: 1px solid #ccc;">Aksi</th>
-                            <th style="padding: 10px; border: 1px solid #ccc;">Date Added</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-                        {% for product in products %}
-                            <tr>
-                                <td style="padding: 10px; border: 1px solid #ccc;">{{ product.name }}</td>
-                                <td style="padding: 10px; border: 1px solid #ccc;">
+
+
+
+<main>
+    <section class="stock-control">
+        <h2>Stok Buku</h2>
+        <p>Total Stok Buku: <span id="totalStock">{{ total_stock }}</span></p>
+    </section>
+    <section class="book-list">
+        <h2>Koleksi Buku</h2>
+        <div class="container">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-md-4 mb-4" style="{% if forloop.last %}background-color: #ffeeba; color: #ff5733;{% endif %}">
+                    <div class="card" >
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-5"> <!-- Increased grid size for image -->
                                     {% if product.image %}
-                                        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; max-height: 150px; border: 1px solid #ccc;">
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img">
                                     {% else %}
-                                        <p>No image available for this product</p>
+                                    <p class="no-image">No image available for this product</p>
                                     {% endif %}
-                                </td>
-                                <td style="padding: 10px; border: 1px solid #ccc;">{{ product.author }}</td>
-                                <td style="padding: 10px; border: 1px solid #ccc;">{{ product.year }}</td>
-                                <td style="padding: 10px; border: 1px solid #ccc;">{{ product.publisher }}</td>
-                                <td style="padding: 10px; border: 1px solid #ccc;">{{ product.genre }}</td>
-                                <td style="padding: 10px; border: 1px solid #ccc;">{{ product.description }}</td>
-                                <td style="padding: 10px; border: 1px solid #ccc;">{{ product.rating }}/5</td>
-                                <td style="padding: 10px; border: 1px solid #ccc;">{{ product.amount }}</td>
-                                <td style="padding: 10px; border: 1px solid #ccc;">
-                                    {% with button_label="Delete" %}
-                                    <form method="post" action="{% url 'main:increase_stock' product.id %}">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="action" value="increase">
-                                        <button type="submit" style="width: {{ button_label|length }}ch; text-align: center; display: inline-flex; align-items: center; justify-content: center;">+</button>
-                                    </form>
-                                    <form method="post" action="{% url 'main:decrease_stock' product.id %}">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="action" value="decrease">
-                                        <button type="submit" style="width: {{ button_label|length }}ch; text-align: center; display: inline-flex; align-items: center; justify-content: center;">-</button>
-                                    </form>
-                                    <form method="post" action="{% url 'main:delete_product' product.id %}">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="action" value="delete">
-                                        <button type="submit" style="width: {{ button_label|length }}ch; text-align: center; display: inline-flex; align-items: center; justify-content: center;">Delete</button>
-                                    </form>
-                                    {% endwith %}
-                                </td>                                               
-                                <td style="padding: 10px; border: 1px solid #ccc; font-size: smaller;">{{ product.date_added }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                </div>
+                                <div class="col-md-7"> <!-- Decreased grid size for content -->
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                    <!-- Show More Button -->
+                                    <button class="btn btn-primary show-more-btn float-right">Show More</button>
+                                    <div class="mb-2">
+                                        <div class="btn-group" role="group">
+                                            <form method="post" action="{% url 'main:increase_stock' product.id %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="increase">
+                                                <button type="submit" class="btn btn-success mr-2">+</button>
+                                            </form>
+                                            <form method="post" action="{% url 'main:decrease_stock' product.id %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="decrease">
+                                                <button type="submit" class="btn btn-warning">-</button>
+                                            </form>
+                                        </div>
+                                        <p>Jumlah Stok: {{ product.amount }}</p>
+                                        <form method="post" action="{% url 'main:delete_product' product.id %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="delete">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Additional Information (Initially Hidden) -->
+                            <div class="additional-info" style="display: none;">
+                                <p><strong>Penulis:</strong> {{ product.author }}</p>
+                                <p><strong>Tahun Terbit:</strong> {{ product.year }}</p>
+                                <p><strong>Penerbit:</strong> {{ product.publisher }}</p>
+                                <p><strong>Genre:</strong> {{ product.genre }}</p>
+                                <p><strong>Deskripsi:</strong> {{ product.description }}</p>
+                                <p><strong>Rating:</strong> {{ product.rating }}/5</p>
+                            </div>
+                            <div class="card-footer text-muted">
+                                {{ product.date_added }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-        </section>
-        
-        <section class="about-us">
-            <h2>About Us</h2>
-            <p>LibraLogia, berasal dari kata "libra" dalam bahasa Inggris yang merujuk pada perpustakaan dan "logia" dalam bahasa Yunani yang berarti ilmu pengetahuan, adalah platform yang memadukan kata "libra" yang merujuk pada perpustakaan dan "logia" dalam bahasa Yunani yang berarti ilmu pengetahuan. Kami hadir untuk menyediakan solusi pengelolaan buku yang efisien dan praktis. Dengan LibraLogia, Anda dapat mengelola koleksi buku dengan mudah dan mengawasi stok dengan cepat. Kami bertujuan untuk memudahkan akses pengetahuan bagi perpustakaan dan individu. Selamat datang di LibraLogia, tempat di mana ilmu pengetahuan dan perpustakaan bertemu dalam satu platform.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 LibraLogia - Perpustakaan Ilmu Pengetahuan</p>
-    </footer>
+        </div>
+    </section>
+    
+    
+    <section class="about-us">
+        <h2>About Us</h2>
+        <p>LibraLogia, berasal dari kata "libra" dalam bahasa Inggris yang merujuk pada perpustakaan dan "logia" dalam bahasa Yunani yang berarti ilmu pengetahuan, adalah platform yang memadukan kata "libra" yang merujuk pada perpustakaan dan "logia" dalam bahasa Yunani yang berarti ilmu pengetahuan. Kami hadir untuk menyediakan solusi pengelolaan buku yang efisien dan praktis. Dengan LibraLogia, Anda dapat mengelola koleksi buku dengan mudah dan mengawasi stok dengan cepat. Kami bertujuan untuk memudahkan akses pengetahuan bagi perpustakaan dan individu. Selamat datang di LibraLogia, tempat di mana ilmu pengetahuan dan perpustakaan bertemu dalam satu platform.</p>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2023 LibraLogia - Perpustakaan Ilmu Pengetahuan</p>
+</footer>
+</main>
+</footer>
+<script>
+    // JavaScript to toggle visibility of additional information
+    document.addEventListener('DOMContentLoaded', function () {
+        const showMoreButtons = document.querySelectorAll('.show-more-btn');
+    
+        showMoreButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const card = this.closest('.card');
+                const additionalInfo = card.querySelector('.additional-info');
+                if (additionalInfo.style.display === 'none' || additionalInfo.style.display === '') {
+                    additionalInfo.style.display = 'block';
+                    this.textContent = 'Show Less';
+                } else {
+                    additionalInfo.style.display = 'none';
+                    this.textContent = 'Show More';
+                }
+            });
+        });
+    });
+</script>
+
 {% endblock content %}
