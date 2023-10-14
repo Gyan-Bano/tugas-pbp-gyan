@@ -3,6 +3,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from decimal import Decimal
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
+import os
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -21,5 +24,15 @@ class Product(models.Model):
         ]
     )
     amount = models.IntegerField()
-    date_added = models.DateTimeField(default=timezone.now)  # Set a default value
+    date_added = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+@receiver(pre_delete, sender=Product)
+def delete_product_image(sender, instance, **kwargs):
+    # Get the image field value
+    image = instance.image
+
+    # Check if the image exists and delete it
+    if image:
+        if os.path.isfile(image.path):
+            os.remove(image.path)

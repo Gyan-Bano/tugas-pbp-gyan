@@ -2,17 +2,14 @@
 {% load static %}
 
 {% block content %}
-<header style="padding-top: 50px;">
+<header>
+    <div style="margin-top: 60px;"> <!-- Menambahkan margin atas -->
     <h1>{{ app_name }} - Perpustakaan Ilmu Pengetahuan</h1>
     <h6>by: Gyanamurti Adhikara Bano</h6>
     <h6>nama: {{ name }}</h6>
     <h6>kelas: {{ class }}</h6>
     <h5>Sesi terakhir login: {{ last_login }}</h5>
 </header>
-
-
-
-
 
 <main>
     <section class="stock-control">
@@ -21,66 +18,73 @@
     </section>
     <section class="book-list">
         <h2>Koleksi Buku</h2>
-        <div class="container">
-            <div class="row">
-                {% for product in products %}
-                <div class="col-md-4 mb-4" style="{% if forloop.last %}background-color: #ffeeba; color: #ff5733;{% endif %}">
-                    <div class="card" >
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-5"> <!-- Increased grid size for image -->
-                                    {% if product.image %}
-                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img">
-                                    {% else %}
-                                    <p class="no-image">No image available for this product</p>
-                                    {% endif %}
-                                </div>
-                                <div class="col-md-7"> <!-- Decreased grid size for content -->
-                                    <h5 class="card-title">{{ product.name }}</h5>
-                                    <!-- Show More Button -->
-                                    <button class="btn btn-primary show-more-btn float-right">Show More</button>
-                                    <div class="mb-2">
-                                        <div class="btn-group" role="group">
-                                            <form method="post" action="{% url 'main:increase_stock' product.id %}">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="action" value="increase">
-                                                <button type="submit" class="btn btn-success mr-2">+</button>
-                                            </form>
-                                            <form method="post" action="{% url 'main:decrease_stock' product.id %}">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="action" value="decrease">
-                                                <button type="submit" class="btn btn-warning">-</button>
-                                            </form>
-                                        </div>
-                                        <p>Jumlah Stok: {{ product.amount }}</p>
-                                        <form method="post" action="{% url 'main:delete_product' product.id %}">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="action" value="delete">
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Additional Information (Initially Hidden) -->
-                            <div class="additional-info" style="display: none;">
-                                <p><strong>Penulis:</strong> {{ product.author }}</p>
-                                <p><strong>Tahun Terbit:</strong> {{ product.year }}</p>
-                                <p><strong>Penerbit:</strong> {{ product.publisher }}</p>
-                                <p><strong>Genre:</strong> {{ product.genre }}</p>
-                                <p><strong>Deskripsi:</strong> {{ product.description }}</p>
-                                <p><strong>Rating:</strong> {{ product.rating }}/5</p>
-                            </div>
-                            <div class="card-footer text-muted">
-                                {{ product.date_added }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
+        <div class="container mt-4">
+            <div class="row" id="cards">
             </div>
         </div>
     </section>
     
+    <!-- Add a button to open the modal for adding products -->
+    {% comment %} <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add Product by AJAX
+    </button>
+     {% endcomment %}
+    <!-- Add Product Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Tambah Koleksi Buku by AJAX</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="col-form-label">Image:</label>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/jpeg, image/jpg, image/png, image/gif"></input>
+                        </div>                        
+                        <div class="mb-3">
+                            <label for="author" class="col-form-label">Author:</label>
+                            <input type="text" class="form-control" id="author" name="author"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="year" class="col-form-label">Year:</label>
+                            <input type="number" class="form-control" id="year" name="year"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="publisher" class="col-form-label">Publisher:</label>
+                            <input type="text" class="form-control" id="publisher" name="publisher"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="genre" class="col-form-label">Genre:</label>
+                            <input type="text" class="form-control" id="genre" name="genre"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rating" class="col-form-label">Rating:</label>
+                            <input type="number" step="0.1" class="form-control" id="rating" name="rating"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="col-form-label">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add">Add Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <section class="about-us">
         <h2>About Us</h2>
@@ -95,22 +99,191 @@
 <script>
     // JavaScript to toggle visibility of additional information
     document.addEventListener('DOMContentLoaded', function () {
-        const showMoreButtons = document.querySelectorAll('.show-more-btn');
-    
-        showMoreButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const card = this.closest('.card');
+    // Attach the event handler to the document
+        document.addEventListener('click', function (event) {
+            // Check if the clicked element has the 'show-more-btn' class
+            if (event.target.classList.contains('show-more-btn')) {
+                const card = event.target.closest('.card');
                 const additionalInfo = card.querySelector('.additional-info');
                 if (additionalInfo.style.display === 'none' || additionalInfo.style.display === '') {
                     additionalInfo.style.display = 'block';
-                    this.textContent = 'Show Less';
+                    event.target.textContent = 'Show Less';
                 } else {
                     additionalInfo.style.display = 'none';
-                    this.textContent = 'Show More';
+                    event.target.textContent = 'Show More';
                 }
-            });
+            }
         });
+
+        // Call refreshProducts() only when the page has finished loading
+        refreshProducts();
     });
+
+    
+
+    async function getProducts() {
+        return fetch("{% url 'main:get_product_json' %}").then((res) => res.json());
+    }
+
+    async function refreshProducts() {
+        const products = await getProducts();
+        const productCards = document.getElementById("cards");
+        productCards.innerHTML = "";
+    
+        products.forEach((item) => {
+            const productCard = document.createElement("div");
+            productCard.classList.add("col-md-4", "mb-4");
+    
+            productCard.innerHTML = `
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            ${
+                                item.fields.image
+                                    ? `<img src="/media/${item.fields.image}" alt="${item.fields.name}" class="card-img" style="max-width: 125px;">`
+                                    : `<p class="no-image">No image available for this product</p>`
+                            }
+                        </div>                        
+                        <div class="col-md-7">
+                            <h5 class="card-title">${item.fields.name}</h5>
+                            <button class="btn btn-primary show-more-btn float-right">Show More</button>
+                            <div class="mb-2">
+                                <div class="btn-group" role="group">
+                                    <form method="post" action="/increase_stock/${item.pk}/">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="increase">
+                                        <button type="submit" class="btn btn-success mr-2" style="margin-right: 1px;">+</button>
+                                    </form>
+                                    <form method="post" action="/decrease_stock/${item.pk}/">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="decrease">
+                                        <button type="submit" class="btn btn-warning" style="margin-left: 10px;">-</button>
+                                    </form>
+                                </div>
+                                <!-- Your stock increase/decrease and edit/delete forms here -->
+                                <p>Jumlah Stok: ${item.fields.amount}</p>
+                                <div class="btn-group" role="group">
+                                    <form action="/edit-product/${item.pk}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-primary" style="margin-right: 1px;">
+                                            Edit
+                                        </button>
+                                    </form>
+                                    <form method="post" action="/delete_product/${item.pk}/">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="delete">
+                                        <button type="submit" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Additional Information (Initially Hidden) -->
+                    <div class="additional-info" style="display: none;">
+                        <p><strong>Penulis:</strong> ${item.fields.author}</p>
+                        <p><strong>Tahun Terbit:</strong> ${item.fields.year}</p>
+                        <p><strong>Penerbit:</strong> ${item.fields.publisher}</p>
+                        <p><strong>Genre:</strong> ${item.fields.genre}</p>
+                        <p><strong>Deskripsi:</strong> ${item.fields.description}</p>
+                        <p><strong>Rating:</strong> ${item.fields.rating}/5</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        ${item.fields.date_added}
+                    </div>
+                </div>
+            </div>
+            `;
+    
+            productCards.appendChild(productCard);
+        });
+    }
+    
+    
+
+    {% comment %} function addProduct() {
+        fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts);
+
+        document.getElementById("form").reset();
+        return false;
+    } {% endcomment %}
+
+    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+
+    function addProduct() {
+        // Get form input values
+        const name = document.getElementById('name').value;
+        const author = document.getElementById('author').value;
+        const year = document.getElementById('year').value;
+        const publisher = document.getElementById('publisher').value;
+        const genre = document.getElementById('genre').value;
+        const description = document.getElementById('description').value;
+        const rating = document.getElementById('rating').value;
+        const amount = document.getElementById('amount').value;
+    
+        // Check if any field is empty
+        if (
+            name.trim() === '' ||
+            author.trim() === '' ||
+            year.trim() === '' ||
+            publisher.trim() === '' ||
+            genre.trim() === '' ||
+            description.trim() === '' ||
+            rating.trim() === '' ||
+            amount.trim() === ''
+        ) {
+            // Display a warning message
+            alert('Please fill in all fields before submitting.');
+            return;
+        }
+    
+        // All fields are filled, proceed with form submission
+        let formData = new FormData();
+        formData.append('name', name);
+        formData.append('image', document.getElementById('image').files[0]);
+        formData.append('author', author);
+        formData.append('year', year);
+        formData.append('publisher', publisher);
+        formData.append('genre', genre);
+        formData.append('description', description);
+        formData.append('rating', rating);
+        formData.append('amount', amount);
+    
+        fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: formData
+        }).then(refreshProducts);
+    
+        document.getElementById("form").reset();
+        const currentTotalStock = parseInt(document.getElementById('totalStock').textContent);
+        // Add the 'amount' to the current total stock
+        const newTotalStock = currentTotalStock + parseInt(amount);
+        // Update the 'textContent' of the 'totalStock' element with the new total stock value
+        document.getElementById('totalStock').textContent = newTotalStock;
+        myModal.hide(); // Close the modal
+        return false; // This prevents the default form submission behavior
+    }
+    document.getElementById("button_add").onclick = addProduct;
+
+    refreshProducts();
+
+    function formatDateToIndonesian(dateTimeString) {
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            timeZoneName: 'short',
+        };
+        const date = new Date(dateTimeString);
+        return date.toLocaleDateString('id-ID', options);
+    }
+    
 </script>
 
 {% endblock content %}

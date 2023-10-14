@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from main.forms import ProductForm, StockUpdateForm
 from main.models import Product
 from django.db.models import Sum  # Import the Sum function from django.db.models
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 from django.core import serializers
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 # Create your views here.
@@ -95,7 +97,6 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
-@login_required(login_url='/login')
 def increase_stock(request, product_id):
     if request.method == 'POST':
         product = Product.objects.get(id=product_id, user=request.user)
@@ -105,7 +106,6 @@ def increase_stock(request, product_id):
             product.save()
     return redirect('main:show_main')
 
-@login_required(login_url='/login')
 def decrease_stock(request, product_id):
     if request.method == 'POST':
         product = Product.objects.get(id=product_id, user=request.user)
@@ -115,7 +115,6 @@ def decrease_stock(request, product_id):
             product.save()
     return redirect('main:show_main')
 
-@login_required(login_url='/login')
 def delete_product(request, product_id):
     if request.method == 'POST' and request.POST.get('action') == 'delete':
         try:
@@ -125,3 +124,69 @@ def delete_product(request, product_id):
             pass  # Product doesn't exist, no action required
 
     return redirect('main:show_main')
+
+def edit_product(request, id):
+    # Get product by ID
+    product = Product.objects.get(pk=id)
+
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            print(request.FILES)  # Debug: Print uploaded files
+            form.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+
+    else:
+        form = ProductForm(instance=product)
+
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
+
+
+
+def get_product_json(request):
+    product_item = Product.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', product_item))
+
+# @csrf_exempt
+# def add_product_ajax(request):
+#     if request.method == 'POST':
+#         name = request.POST.get("name")
+#         author = request.POST.get("author")
+#         year = request.POST.get("year")
+#         publisher = request.POST.get("publisher")
+#         genre = request.POST.get("genre")
+#         description = request.POST.get("description")
+#         rating = request.POST.get("rating")
+#         amount = request.POST.get("amount")
+
+#         user = request.user
+
+#         new_product = Product(
+#             name=name,
+#             author=author,
+#             year=year,
+#             publisher=publisher,
+#             genre=genre,
+#             description=description,
+#             rating=rating,
+#             amount=amount,
+#             user=user,
+#         )
+#         new_product.save()
+
+#         return HttpResponse(b"CREATED", status=201)
+
+#     return HttpResponseNotFound()
+
+@csrf_exempt
+def add_product_ajax(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.user = request.user
+            product.save()
+            return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
