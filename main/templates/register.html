@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Register</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center bg-primary text-white">
+                    <h1>Register</h1>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary btn-block" type="submit">Daftar</button>
+                                    <a class="btn btn-danger btn-block" href="{% url 'main:login' %}">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                            <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

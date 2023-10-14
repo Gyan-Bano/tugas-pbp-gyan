@@ -1,0 +1,59 @@
+<!-- book_card.html -->
+<div class="col-md-4 mb-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img">
+                    {% else %}
+                        <p class="no-image">No image available for this product</p>
+                    {% endif %}
+                </div>
+                <div class="col-md-7">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <button class="btn btn-primary show-more-btn float-right">Show More</button>
+                    <div class="mb-2">
+                        <div class="btn-group" role="group">
+                            <form method="post" action="{% url 'main:increase_stock' product.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="increase">
+                                <button type="submit" class="btn btn-success mr-2" style="margin-right: 1px;">+</button>
+                            </form>
+                            <form method="post" action="{% url 'main:decrease_stock' product.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="decrease">
+                                <button type="submit" class="btn btn-warning" style="margin-left: 10px;">-</button>
+                            </form>
+                        </div>
+                        <p>Jumlah Stok: {{ product.amount }}</p>
+                        <div class="btn-group" role="group">
+                            <form action="">
+                                <button type="button" class="btn btn-primary" style="margin-right: 1px;">
+                                    <a href="{% url 'main:edit_product' product.id %}" class="text-white" style="text-decoration: none;">Edit</a>
+                                </button>
+                            </form>
+                            <form method="post" action="{% url 'main:delete_product' product.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="delete">
+                                <button type="submit" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional Information (Initially Hidden) -->
+            <div class="additional-info" style="display: none;">
+                <p><strong>Penulis:</strong> {{ product.author }}</p>
+                <p><strong>Tahun Terbit:</strong> {{ product.year }}</p>
+                <p><strong>Penerbit:</strong> {{ product.publisher }}</p>
+                <p><strong>Genre:</strong> {{ product.genre }}</p>
+                <p><strong>Deskripsi:</strong> {{ product.description }}</p>
+                <p><strong>Rating:</strong> {{ product.rating }}/5</p>
+            </div>
+            <div class="card-footer text-muted">
+                {{ product.date_added }}
+            </div>
+        </div>
+    </div>
+</div>
