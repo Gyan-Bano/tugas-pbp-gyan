@@ -1,2 +1,2 @@
 release: django-admin migrate --noinput
-web: gunicorn tugas-pbp-gyan.wsgi
+web: gunicorn tugas_pbp_gyan.wsgi
