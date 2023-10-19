@@ -4,7 +4,7 @@ WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app \
-    DJANGO_SETTINGS_MODULE=tugas-pbp-gyan.settings \
+    DJANGO_SETTINGS_MODULE=tugas_pbp_gyan.settings \
     PORT=8000 \
     WEB_CONCURRENCY=2
 
