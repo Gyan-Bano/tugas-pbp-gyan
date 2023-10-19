@@ -29,4 +29,4 @@ RUN chown -R django:django /app
 USER django
 
 # Run application
-# CMD gunicorn tugas-pbp-gyan.wsgi:application
+# CMD gunicorn tugas_pbp_gyan.wsgi:application
