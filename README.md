@@ -3,6 +3,7 @@ Gyanamurti Adhikara Bano
 2206082266
 
 link: https://libralogia.adaptable.app/
+http://gyanamurti-adhikara-tugas.pbp.cs.ui.ac.id/login/?next=/
 
 ## TUGAS 2
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step
