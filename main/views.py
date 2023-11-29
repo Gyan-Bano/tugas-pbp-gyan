@@ -14,6 +14,8 @@ import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
+
 
 
 
@@ -60,6 +62,23 @@ def show_json(request):
 def show_xml_by_id(request, id):
     data = Product.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+@csrf_exempt
+def shoW_json_modif(request):
+    data = json.loads(request.body)
+    user_id = data['user_id']
+    # flutter = {
+    #  'user_id' : input user id    # }
+    user = User.objects.get(pk=user_id)
+    products = Product.objects.filter(user=user)
+
+    product_list = []
+    for product in products:
+        product_list.append(product.to_dict())
+    return JsonResponse({'products':product_list})
+
+
+
 
 def show_json_by_id(request, id):
     data = Product.objects.filter(pk=id)
@@ -200,12 +219,17 @@ def create_product_flutter(request):
     if request.method == 'POST':
         
         data = json.loads(request.body)
-
+        print(data)
         new_product = Product.objects.create(
-            user = request.user,
-            name = data["name"],
-            ammount = int(data["ammount"]),
-            description = data["description"]
+            user=request.user,
+            name=data["name"],
+            amount=int(data["amount"]),
+            description=data["description"],
+            author=data["author"],  # Pastikan bidang ini selalu ada dalam data yang diterima
+            year=int(data["year"]),
+            publisher=data["publisher"],
+            genre=data["genre"],
+            rating=float(data["rating"])
         )
 
         new_product.save()
